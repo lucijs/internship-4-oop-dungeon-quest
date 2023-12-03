@@ -1,0 +1,15 @@
+C:\Users\frade\Desktop\DUMP Internship\internship-4-oop-dungeon-quest\DungeonQuest\Library.Data\bin\Debug\net8.0\Library.Data.exe
+C:\Users\frade\Desktop\DUMP Internship\internship-4-oop-dungeon-quest\DungeonQuest\Library.Data\bin\Debug\net8.0\Library.Data.deps.json
+C:\Users\frade\Desktop\DUMP Internship\internship-4-oop-dungeon-quest\DungeonQuest\Library.Data\bin\Debug\net8.0\Library.Data.runtimeconfig.json
+C:\Users\frade\Desktop\DUMP Internship\internship-4-oop-dungeon-quest\DungeonQuest\Library.Data\bin\Debug\net8.0\Library.Data.dll
+C:\Users\frade\Desktop\DUMP Internship\internship-4-oop-dungeon-quest\DungeonQuest\Library.Data\bin\Debug\net8.0\Library.Data.pdb
+C:\Users\frade\Desktop\DUMP Internship\internship-4-oop-dungeon-quest\DungeonQuest\Library.Data\obj\Debug\net8.0\Library.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\frade\Desktop\DUMP Internship\internship-4-oop-dungeon-quest\DungeonQuest\Library.Data\obj\Debug\net8.0\Library.Data.AssemblyInfoInputs.cache
+C:\Users\frade\Desktop\DUMP Internship\internship-4-oop-dungeon-quest\DungeonQuest\Library.Data\obj\Debug\net8.0\Library.Data.AssemblyInfo.cs
+C:\Users\frade\Desktop\DUMP Internship\internship-4-oop-dungeon-quest\DungeonQuest\Library.Data\obj\Debug\net8.0\Library.Data.csproj.CoreCompileInputs.cache
+C:\Users\frade\Desktop\DUMP Internship\internship-4-oop-dungeon-quest\DungeonQuest\Library.Data\obj\Debug\net8.0\Library.Data.sourcelink.json
+C:\Users\frade\Desktop\DUMP Internship\internship-4-oop-dungeon-quest\DungeonQuest\Library.Data\obj\Debug\net8.0\Library.Data.dll
+C:\Users\frade\Desktop\DUMP Internship\internship-4-oop-dungeon-quest\DungeonQuest\Library.Data\obj\Debug\net8.0\refint\Library.Data.dll
+C:\Users\frade\Desktop\DUMP Internship\internship-4-oop-dungeon-quest\DungeonQuest\Library.Data\obj\Debug\net8.0\Library.Data.pdb
+C:\Users\frade\Desktop\DUMP Internship\internship-4-oop-dungeon-quest\DungeonQuest\Library.Data\obj\Debug\net8.0\Library.Data.genruntimeconfig.cache
+C:\Users\frade\Desktop\DUMP Internship\internship-4-oop-dungeon-quest\DungeonQuest\Library.Data\obj\Debug\net8.0\ref\Library.Data.dll
