@@ -1,26 +1,29 @@
 ﻿using Library.Domain.Repositories.Enum;
-using System.Security.Cryptography;
-
+using Library.Domain.Repositories.Interfaces;
+using System.Text;
 namespace Library.Domain.Repositories
 {
-    class Monster : Character
-    {
-        //we will be using it as goblin and it will be a parent class to brutes and witches 
-        public TypesOfMonsters Type { get; set; } = TypesOfMonsters.Goblin;
-
-        public Monster()
+    class Monster : Character, IAttacks
+    { 
+        public TypesOfMonsters Type { get; set; }
+        public int locationInDictionary { get; set; } = Help.RandomNumber() % 3 + 1;
+        public Monster(int scale1, int scale2, int scale3)
         {
-            HealthPoints = Help.RandomNumber(30);
-            Damage = Help.RandomNumber(30);
-            Experience = Help.RandomNumber(8);
-            Console.WriteLine($"{HealthPoints} - {Experience} - {Damage}");
+            HealthPoints = Help.RandomNumber(scale1);
+            Damage = Help.RandomNumber(scale2);
+            Experience = Help.RandomNumber(scale3);
         }
 
-        public static void DirectAttack()
-        { }
-        public static void SideAttack()
-        { }
-        public static void CounterAttack()
-        { }
+        public StringBuilder NewPrint()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"\nmonster:\n\t{Type}");
+            sb.Append(Print());
+            return sb;
+        }
+        public void Won(Character character)
+        { 
+            
+        }
     }
 }

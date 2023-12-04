@@ -1,8 +1,1 @@
-﻿using Library.Domain.Repositories;
-
-static void Ime()
-{ 
-    
-}
-
-Console.WriteLine("Hello, World!");
+﻿Console.WriteLine("Hello, World!");

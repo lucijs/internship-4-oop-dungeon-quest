@@ -4,38 +4,33 @@
     {
         public static void HeroIsGladiator(string name)
         {
-            Gladiator gladiator = new Gladiator(name);
+            AllMonsters.hero = new Gladiator(name);
+            AllMonsters.MonstersList();
         }
 
         public static void HeroIsEnchater(string name)
         {
-            Enchater enchater = new Enchater(name);
-            AllMonsters.GetMonster();
+            AllMonsters.hero = new Enchater(name);
+            AllMonsters.MonstersList();
         }
 
         public static void HeroIsMarksman(string name)
         {
-            Marksman marksman = new Marksman(name); 
+            AllMonsters.hero = new Marksman(name);
+            AllMonsters.MonstersList();
         }
-        
+
         public static bool Default(double hp, double d, string name)
         {
             if(d>60 && hp>60 &&hp>0 && d>0)
                 return false;
             if (d > 60)
-            {
-                Enchater enchater = new Enchater(name, hp, d);
-            }
+                AllMonsters.hero = new Enchater(name, hp, d);
             else if (hp > 60)
-            {
-                Gladiator gladiator = new Gladiator(name, hp, d);
-
-            }
-            else 
-            {
-                Marksman marksman = new Marksman(name, hp, d);
-
-            }
+                AllMonsters.hero = new Gladiator(name, hp, d);
+            else
+                AllMonsters.hero = new Marksman(name, hp, d);
+            AllMonsters.MonstersList();
             return true;
         }
 

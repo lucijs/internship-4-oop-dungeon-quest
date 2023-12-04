@@ -1,11 +1,7 @@
 ﻿namespace Library.Domain.Repositories.Interfaces
 {
-    internal interface IAttacks
+    interface IAttacks
     {
-        void DirectAttack();
-        void SideAttack();
-
-        void CounterAttack();
-
+        void Won(Character character);
     }
 }

@@ -21,26 +21,16 @@ namespace Library.Domain.Repositories
             HealthPoints = healthPoints;
             Damage = damage;
         }
-        public Hero(int healthPoints, int damage, string name)
-        {
-            HealthPoints = healthPoints;
-            Damage = damage;
-            Experience = 0;
-            Name = name;
-        }
-
-        public StringBuilder Print()
+        public StringBuilder NewPrint()
         { 
             StringBuilder sb = new StringBuilder();
-            sb.Append($"Name {Name}\n\t{Type}\n\tHeath Points {HealthPoints}\n\tExperience {Experience}\n\tDamage {Damage}");
+            sb.Append($"Name {Name}\n\t{Type}");
+            sb.Append(Print());
             return sb;
         }
-
-        public void DirectAttack()
-        { }
-        public void SideAttack()
-        { }
-        public void CounterAttack()
-        { }
+        public void Won(Character character)
+        { 
+            
+        }
     }
 }
