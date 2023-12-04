@@ -1,4 +1,5 @@
 ﻿using Library.Domain.Repositories.All_Characters.Monsters;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
 namespace Library.Domain.Repositories
@@ -9,17 +10,31 @@ namespace Library.Domain.Repositories
         static Monster monster;
         static int number;
 
-        public static (bool?,bool) MakingMove(int actionKey)
+        public static (bool?,bool) MakingMove(int actionKey, bool activateRage )
         {
             monster = AllMonsters.Monsters[0];
             number = monster.locationInDictionary;
             var check = WhoWon(actionKey, number);
+            if (monster.LoseNextRound)
+                check = true;
             if (check == null)
                 return (false,false);
             if (check == true)
             {
+                if (activateRage)
+                {
+                    Initialize.hero.Rage();
+                    monster.Lost(Initialize.hero);
+                }
                 monster.Lost(Initialize.hero);
                 Initialize.hero.Won(monster);
+                if (Initialize.hero.Type == Enum.TypesOfHeroes.Enchater)
+                { 
+                    if(Initialize.hero.StunChance>49)
+                        monster.Lost(Initialize.hero);
+                    if (Initialize.hero.StunChance > 55)
+                        monster.LoseNextRound = true;
+                }
                 if (monster.HealthPoints <= 0)
                 {
                     if (AllMonsters.Monsters.Count > 0)
@@ -29,7 +44,7 @@ namespace Library.Domain.Repositories
                     {
                         var list = new List<Monster>(){AllMonsters.GetMonster(), AllMonsters.GetMonster() };
                         list.AddRange(AllMonsters.Monsters);
-                        AllMonsters.Monsters= list;                     
+                        AllMonsters.Monsters= list;
                     }
                     Initialize.hero.HealthPoints += 25;
                     if (AllMonsters.Monsters.Count == 0)
@@ -42,6 +57,20 @@ namespace Library.Domain.Repositories
             }
             else
             {
+                var isWitch = monster as Witch;
+                if (isWitch != null)
+                {
+                    int? num = isWitch.Badlam();
+                    if (num != null)
+                    {
+                        foreach (var mon in AllMonsters.Monsters)
+                        {
+                            mon.HealthPoints = (int)num;
+                        }
+                        Initialize.hero.HealthPoints= (int)num;
+                        return (false, false);
+                    }
+                }
                 Initialize.hero.Lost(monster);
                 if (Initialize.hero.HealthPoints <= 0)
                 {
@@ -79,6 +108,11 @@ namespace Library.Domain.Repositories
             if (num1 == num2)
                 return null;
             return false;
+        }
+
+        public static bool RageAccessibility()
+        {
+            return Initialize.hero.IsGladiator();
         }
     }
 }

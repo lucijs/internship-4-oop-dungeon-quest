@@ -9,14 +9,9 @@ namespace Library.Domain.Repositories
         public string Name { get; set; }
         public TypesOfHeroes Type { get; set; }
         public bool Died { get; set; }
-        
-
-        public double Mana { get; set; }  //za enchatera
-
-
+        public double Mana { get; set; } 
         public double CriticalChance { get; set; }
-        public double StunChance { get; set; } //dodat ovo dvoje za marksmana
-
+        public double StunChance { get; set; } 
 
         public Hero(string name, double healthPoints, double damage)
         {
@@ -25,6 +20,9 @@ namespace Library.Domain.Repositories
             HealthPoints = healthPoints;
             Damage = damage;
             Died = false;
+            CriticalChance = 30;
+            StunChance = 25;
+            Mana = 40;
         }
         public StringBuilder NewPrint()
         { 
@@ -41,6 +39,9 @@ namespace Library.Domain.Repositories
                 HealthPoints += 15;
                 Damage += 5;
                 Experience %= 100;
+                StunChance += 7;
+                CriticalChance += 8;
+                Mana *= 1.1;
             }
         }
         public void Lost(Character character)
@@ -61,10 +62,14 @@ namespace Library.Domain.Repositories
         //dodat ovo za heroja
         public void Rage()
         {
-            Damage *= 2;
             HealthPoints *= 0.85;
         }
-
+        public bool IsGladiator()
+        { 
+            if(Type == Enum.TypesOfHeroes.Gladiator)
+                return true;
+            return false;
+        }
         public void Reset(Enum.TypesOfHeroes type, string name, double hp, double d)
         {
             Type= type;

@@ -10,11 +10,11 @@ namespace Library.Domain.Repositories
         {
             var number = Help.RandomNumber();
             Monster monster;
-            if (number < 60)
+            if (number < 75)
             {
                 monster = new Goblin();
             }
-            else if (number >= 60 && number < 90)
+            else if (number >= 75 && number < 85)
             {
                 monster = new Witch();
             }

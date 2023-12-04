@@ -14,6 +14,7 @@ static bool StartTheGame(bool first)
     Console.WriteLine("Character name:");
     var name = Console.ReadLine();
     Console.WriteLine("If you want to define health points and damage yourself write yes, othervise you can choose which kind of hero you want to be.");
+    Console.WriteLine();
     var input = Console.ReadLine();
     if (input.Trim().ToLower() != "yes")
         ChooseCharacter(name, first);
@@ -60,6 +61,14 @@ static (bool?,bool) Round()
     Console.Clear();
     StartPlaying.SetOutput();
     Console.WriteLine(StartPlaying.sb);
+    bool activateRage=false;
+    if (StartPlaying.RageAccessibility())
+    {
+        Console.WriteLine("If you want to use Rage (your danage doubles, however your health points lower for 15%) press r");
+        var whatKey = Console.ReadKey();
+        if (whatKey.KeyChar == 'r')
+            activateRage = true;
+    }
     Console.WriteLine("\nPress the key corresponding to type of attack you want to make.\n\tdirect attack - d\n\tside attack - s\n\tcounter attack - c");
     var pressedKey = Console.ReadKey();
     Console.ReadKey();
@@ -75,7 +84,7 @@ static (bool?,bool) Round()
         Console.WriteLine("Incorrect input, try again");
         Round();
     }
-    return StartPlaying.MakingMove(number);
+    return StartPlaying.MakingMove(number, activateRage);
 }
 static void ChooseCharacter(string name, bool first)
 {

@@ -7,11 +7,13 @@ namespace Library.Domain.Repositories
     { 
         public TypesOfMonsters Type { get; set; }
         public int locationInDictionary { get; set; } 
+        public bool LoseNextRound { get; set; }
         public Monster(int scale1, int scale2, int scale3, int scale4)
         {
             HealthPoints = Help.RandomNumber(scale1)+scale4;
             Damage = Help.RandomNumber(scale2) + scale4;
             Experience = Help.RandomNumber(scale3) + scale4;
+            LoseNextRound = false;
         }
 
         public StringBuilder NewPrint()
