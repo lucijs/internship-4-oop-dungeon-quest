@@ -24,20 +24,44 @@ static bool StartTheGame()
         double.TryParse(Console.ReadLine(), out d);
         Initialize.Default(hp, d, name);
     }
-    Round();
-    return true;
-}
+    bool? outcome1, outcome2;
+    do
+    {
+        (outcome1,outcome2) = Round();
+        if (outcome2==true)
+        {
+            Console.WriteLine("Do you want to use half of your Experience to renew your Health Points?");
+            var choice = Console.ReadLine();
+            if (choice.Trim().ToLower() != "yes")
+                StartPlaying.IncreaseHealthPoints();
+        }
+            
+        
+    } while (outcome1 == false);
 
-static void Round()
+    if (outcome1 == null)
+    {
+        Console.WriteLine("You lost. Do you want to play another game?");
+        var choice = Console.ReadLine();
+        if (choice.Trim().ToLower() != "yes")
+            return false;
+    }
+    Console.Clear();
+    Console.WriteLine("\n\n\t\t\tCongratulations!\n\n\t\t\tYou won the game!");
+    return false;
+}
+static (bool?,bool) Round()
 {
+    Console.Clear();
     Console.WriteLine(StartPlaying.sb);
-    Console.WriteLine("Press the key corresponding to type of attack you want to make.\n\tdirect attack - D\n\tside attack - S\n\tcounter attack - C");
+    Console.WriteLine("\nPress the key corresponding to type of attack you want to make.\n\tdirect attack - d\n\tside attack - s\n\tcounter attack - c");
     var pressedKey = Console.ReadKey();
+    Console.ReadKey();
     int number = pressedKey.KeyChar switch
     {
-        'D' => 1,
-        'S' => 2,
-        'C' => 3,
+        'd' => 1,
+        's' => 2,
+        'c' => 3,
         _ => 0
     };
     if (number == 0)
@@ -45,7 +69,7 @@ static void Round()
         Console.WriteLine("Incorrect input, try again");
         Round();
     }
-    StartPlaying.Round(number);
+    return StartPlaying.MakingMove(number);
 }
 static void ChooseCharacter(string name)
 {

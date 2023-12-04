@@ -6,12 +6,12 @@ namespace Library.Domain.Repositories
     class Monster : Character, IAttacks
     { 
         public TypesOfMonsters Type { get; set; }
-        public int locationInDictionary { get; set; } = Help.RandomNumber() % 3 + 1;
-        public Monster(int scale1, int scale2, int scale3)
+        public int locationInDictionary { get; set; } 
+        public Monster(int scale1, int scale2, int scale3, int scale4)
         {
-            HealthPoints = Help.RandomNumber(scale1);
-            Damage = Help.RandomNumber(scale2);
-            Experience = Help.RandomNumber(scale3);
+            HealthPoints = Help.RandomNumber(scale1)+scale4;
+            Damage = Help.RandomNumber(scale2) + scale4;
+            Experience = Help.RandomNumber(scale3) + scale4;
         }
 
         public StringBuilder NewPrint()
@@ -22,8 +22,12 @@ namespace Library.Domain.Repositories
             return sb;
         }
         public void Won(Character character)
-        { 
-            
+        {
+        }
+
+        public void Lost(Character character)
+        {
+            HealthPoints -= character.Damage;
         }
     }
 }

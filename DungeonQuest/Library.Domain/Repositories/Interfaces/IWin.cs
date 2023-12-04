@@ -1,6 +1,6 @@
 ﻿namespace Library.Domain.Repositories.Interfaces
 {
-    interface IAttacks
+    internal interface IWin
     {
         void Lost(Character character);
 

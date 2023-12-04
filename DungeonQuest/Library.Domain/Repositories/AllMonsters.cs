@@ -23,7 +23,7 @@ namespace Library.Domain.Repositories
             {
                 monster = new Brute();
             }
-            
+            monster.locationInDictionary = number % 3 + 1;
             return monster;
         }
 

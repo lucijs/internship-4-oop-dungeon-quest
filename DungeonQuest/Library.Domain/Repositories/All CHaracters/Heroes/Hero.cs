@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Library.Domain.Repositories
 {
-    class Hero : Character, IAttacks
+    class Hero : Character, IAttacks, IWin
     {
         public string Name { get; set; }
         public TypesOfHeroes Type { get; set; }
@@ -29,8 +29,18 @@ namespace Library.Domain.Repositories
             return sb;
         }
         public void Won(Character character)
-        { 
-            
+        {
+            Experience += character.Experience;
+            if (Experience >= 100)
+            {
+                HealthPoints += 15;
+                Damage += 5;
+                Experience %= 100;
+            }
+        }
+        public void Lost(Character character)
+        {
+            HealthPoints -= character.Damage;
         }
     }
 }
