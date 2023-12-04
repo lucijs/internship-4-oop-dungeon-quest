@@ -1,4 +1,5 @@
 ﻿using Library.Domain.Repositories.Enum;
+using Library.Domain.Repositories.Interfaces;
 using System.Text;
 
 namespace Library.Domain.Repositories
@@ -7,10 +8,18 @@ namespace Library.Domain.Repositories
     {
         public string Name { get; set; }
         public TypesOfHeroes Type { get; set; }
-        public Hero()
+        public Hero(string name)
         {
             Experience = 0;
+            Name = name;
 
+        }
+        public Hero(string name, double healthPoints, double damage)
+        {
+            Experience = 0;
+            Name = name;
+            HealthPoints = healthPoints;
+            Damage = damage;
         }
         public Hero(int healthPoints, int damage, string name)
         {

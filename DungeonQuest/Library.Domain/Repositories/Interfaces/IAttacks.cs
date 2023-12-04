@@ -1,4 +1,4 @@
-﻿namespace Library.Domain.Repositories
+﻿namespace Library.Domain.Repositories.Interfaces
 {
     internal interface IAttacks
     {

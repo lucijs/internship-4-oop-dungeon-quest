@@ -2,45 +2,59 @@
 {
     public class Initialize
     {
-        public static Dictionary<int, Action> AllTypes = new Dictionary<int, Action>()
+        public static void HeroIsGladiator(string name)
         {
-            {1, HeroIsGladiator },
-            {2, HeroIsEnchater},
-            {3, HeroIsMarksman }
-        };
-
-        public static void HeroIsGladiator()
-        {
-            Gladiator gladiator = new Gladiator();
+            Gladiator gladiator = new Gladiator(name);
         }
 
-        public static void HeroIsEnchater()
+        public static void HeroIsEnchater(string name)
         {
-
+            Enchater enchater = new Enchater(name);
+            AllMonsters.GetMonster();
         }
 
-        public static void HeroIsMarksman()
+        public static void HeroIsMarksman(string name)
         {
-
+            Marksman marksman = new Marksman(name); 
         }
-
-        public static void Default()
+        
+        public static bool Default(double hp, double d, string name)
         {
-
-        }
-
-        public static bool ChooseYourself(int choice)
-        {
-            Console.WriteLine(choice);
-            foreach (var option in AllTypes)
+            if(d>60 && hp>60 &&hp>0 && d>0)
+                return false;
+            if (d > 60)
             {
-                if (choice == option.Key)
-                {
-                    option.Value.Invoke();
-                    return true;
-                }
+                Enchater enchater = new Enchater(name, hp, d);
             }
-            return false;
+            else if (hp > 60)
+            {
+                Gladiator gladiator = new Gladiator(name, hp, d);
+
+            }
+            else 
+            {
+                Marksman marksman = new Marksman(name, hp, d);
+
+            }
+            return true;
+        }
+
+        public static bool ChooseYourself(int choice, string name)
+        {
+            switch (choice)
+            {
+                case 1:
+                    HeroIsGladiator(name);
+                    return true;
+                case 2:
+                    HeroIsEnchater(name);
+                    return true;
+                case 3:
+                    HeroIsMarksman(name);
+                    return true;
+                default: 
+                    return false;
+            }
         }
     }
 }
