@@ -24,16 +24,20 @@ static bool StartTheGame()
         double.TryParse(Console.ReadLine(), out d);
         Initialize.Default(hp, d, name);
     }
-    bool? outcome1, outcome2;
+    bool? outcome1;
+    bool outcome2;
+    int roundCounter=1;
     do
     {
         (outcome1,outcome2) = Round();
-        if (outcome2==true)
+        if (outcome2)
         {
-            Console.WriteLine("Do you want to use half of your Experience to renew your Health Points?");
+            Console.Clear();
+            Console.WriteLine($"That was the {roundCounter}. round and you won it.\nDo you want to use half of your Experience to renew your Health Points?");
             var choice = Console.ReadLine();
             if (choice.Trim().ToLower() != "yes")
                 StartPlaying.IncreaseHealthPoints();
+            roundCounter++;
         }
             
         

@@ -6,9 +6,9 @@ namespace Library.Domain
 {
     public static class StartPlaying
     {
-        public static StringBuilder sb = AllMonsters.hero.NewPrint().Append(AllMonsters.Monsters[0].NewPrint());
-        static Monster monster = AllMonsters.Monsters[0];
-        static int number = monster.locationInDictionary;
+        public static StringBuilder sb= AllMonsters.hero.NewPrint().Append(AllMonsters.Monsters[0].NewPrint());
+        static Monster monster;
+        static int number;
 
         public static (bool?,bool) MakingMove(int actionKey)
         {
@@ -32,22 +32,23 @@ namespace Library.Domain
                         list.AddRange(AllMonsters.Monsters);
                         AllMonsters.Monsters= list;                     
                     }
+                    sb.Clear();
+                    sb = AllMonsters.hero.NewPrint().Append(AllMonsters.Monsters[0].NewPrint());
                     AllMonsters.hero.HealthPoints += 25;
-                    if (AllMonsters.Monsters.Count==0)
-                        return (true,true);
+                    if (AllMonsters.Monsters.Count == 0)
+                        return (true, true);
+                    return (false, true);
                 }
-                sb.Clear();
-                sb = AllMonsters.hero.NewPrint().Append(AllMonsters.Monsters[0].NewPrint());
-                return (false, true);
+                
             }
             else
             {
                 AllMonsters.hero.Lost(monster);
-                sb.Clear();
-                sb = AllMonsters.hero.NewPrint().Append(AllMonsters.Monsters[0].NewPrint());
                 if (AllMonsters.hero.HealthPoints <= 0)
                     return (null,false);
             }
+            sb.Clear();
+            sb = AllMonsters.hero.NewPrint().Append(AllMonsters.Monsters[0].NewPrint());
             return (false,false);
         }
 
