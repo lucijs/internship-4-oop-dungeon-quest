@@ -1,20 +1,22 @@
-﻿using Library.Domain;
-using Library.Domain.Repositories;
+﻿using Library.Domain.Repositories;
 
+bool first = true;
 bool play;
 do
 {
-    play = StartTheGame();
+    play = StartTheGame(first);
+    first = false;
 } while (play);
 
-static bool StartTheGame()
+static bool StartTheGame(bool first)
 {
+    Console.Clear();
     Console.WriteLine("Character name:");
     var name = Console.ReadLine();
     Console.WriteLine("If you want to define health points and damage yourself write yes, othervise you can choose which kind of hero you want to be.");
     var input = Console.ReadLine();
     if (input.Trim().ToLower() != "yes")
-        ChooseCharacter(name);
+        ChooseCharacter(name, first);
     else
     {
         Console.WriteLine("Keep in mind that both health points and damage can't b over 60.\nHealth points: ");
@@ -22,7 +24,7 @@ static bool StartTheGame()
         double.TryParse(Console.ReadLine(), out hp);
         Console.WriteLine("Damage: ");
         double.TryParse(Console.ReadLine(), out d);
-        Initialize.Default(hp, d, name);
+        Initialize.Default(hp, d, name, first);
     }
     bool? outcome1;
     bool outcome2;
@@ -39,8 +41,6 @@ static bool StartTheGame()
                 StartPlaying.IncreaseHealthPoints();
             roundCounter++;
         }
-            
-        
     } while (outcome1 == false);
 
     if (outcome1 == null)
@@ -49,6 +49,7 @@ static bool StartTheGame()
         var choice = Console.ReadLine();
         if (choice.Trim().ToLower() != "yes")
             return false;
+        return true;
     }
     Console.Clear();
     Console.WriteLine("\n\n\t\t\tCongratulations!\n\n\t\t\tYou won the game!");
@@ -57,6 +58,7 @@ static bool StartTheGame()
 static (bool?,bool) Round()
 {
     Console.Clear();
+    StartPlaying.SetOutput();
     Console.WriteLine(StartPlaying.sb);
     Console.WriteLine("\nPress the key corresponding to type of attack you want to make.\n\tdirect attack - d\n\tside attack - s\n\tcounter attack - c");
     var pressedKey = Console.ReadKey();
@@ -75,14 +77,14 @@ static (bool?,bool) Round()
     }
     return StartPlaying.MakingMove(number);
 }
-static void ChooseCharacter(string name)
+static void ChooseCharacter(string name, bool first)
 {
     Console.WriteLine("Choose one of the following:\n1. Gladiator\n2. Enchater\n3. Marksman");
     int choice;
     int.TryParse(Console.ReadLine(), out choice);
-    var success = Initialize.ChooseYourself(choice, name);
+    var success = Initialize.ChooseYourself(choice, name, first);
     if (!success)
-        ChooseCharacter(name);
+        ChooseCharacter(name, first);
 }
 
 

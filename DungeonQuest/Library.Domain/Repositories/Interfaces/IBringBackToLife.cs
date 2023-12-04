@@ -1,8 +1,7 @@
 ﻿namespace Library.Domain.Repositories.Interfaces
 {
-    interface IWin
+    interface IBringBackToLife
     {
-        void Lost(Character character);
-
+        bool BringBackToLife();
     }
 }

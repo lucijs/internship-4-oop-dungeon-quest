@@ -5,7 +5,6 @@ namespace Library.Domain.Repositories
     {
         public static List<Monster> Monsters = new List<Monster>();
 
-        public static Hero hero;
 
         public static Monster GetMonster()
         {

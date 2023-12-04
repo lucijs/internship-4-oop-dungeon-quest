@@ -1,12 +1,11 @@
-﻿using Library.Domain.Repositories;
-using Library.Domain.Repositories.All_Characters.Monsters;
+﻿using Library.Domain.Repositories.All_Characters.Monsters;
 using System.Text;
 
-namespace Library.Domain
+namespace Library.Domain.Repositories
 {
     public static class StartPlaying
     {
-        public static StringBuilder sb= AllMonsters.hero.NewPrint().Append(AllMonsters.Monsters[0].NewPrint());
+        public static StringBuilder sb = Initialize.hero.NewPrint().Append(AllMonsters.Monsters[0].NewPrint());
         static Monster monster;
         static int number;
 
@@ -19,8 +18,8 @@ namespace Library.Domain
                 return (false,false);
             if (check == true)
             {
-                monster.Lost(AllMonsters.hero);
-                AllMonsters.hero.Won(monster);
+                monster.Lost(Initialize.hero);
+                Initialize.hero.Won(monster);
                 if (monster.HealthPoints <= 0)
                 {
                     if (AllMonsters.Monsters.Count > 0)
@@ -32,30 +31,42 @@ namespace Library.Domain
                         list.AddRange(AllMonsters.Monsters);
                         AllMonsters.Monsters= list;                     
                     }
-                    sb.Clear();
-                    sb = AllMonsters.hero.NewPrint().Append(AllMonsters.Monsters[0].NewPrint());
-                    AllMonsters.hero.HealthPoints += 25;
+                    Initialize.hero.HealthPoints += 25;
                     if (AllMonsters.Monsters.Count == 0)
                         return (true, true);
+                    sb.Clear();
+                    sb = Initialize.hero.NewPrint().Append(AllMonsters.Monsters[0].NewPrint());
                     return (false, true);
                 }
                 
             }
             else
             {
-                AllMonsters.hero.Lost(monster);
-                if (AllMonsters.hero.HealthPoints <= 0)
-                    return (null,false);
+                Initialize.hero.Lost(monster);
+                if (Initialize.hero.HealthPoints <= 0)
+                {
+                    if (!Initialize.hero.BringBackToLife())
+                    {
+                        sb.Clear();
+                        return (null, false);
+                    }
+                }
             }
             sb.Clear();
-            sb = AllMonsters.hero.NewPrint().Append(AllMonsters.Monsters[0].NewPrint());
+            sb = Initialize.hero.NewPrint().Append(AllMonsters.Monsters[0].NewPrint());
             return (false,false);
         }
 
         public static void IncreaseHealthPoints()
         {
-            AllMonsters.hero.HealthPoints = 100;
-            AllMonsters.hero.Experience /= 2;
+            Initialize.hero.HealthPoints = 100;
+            Initialize.hero.Experience /= 2;
+        }
+
+        public static void SetOutput()
+        {
+            sb.Clear();
+            sb = Initialize.hero.NewPrint().Append(AllMonsters.Monsters[0].NewPrint());
         }
         public static bool? WhoWon(int num1, int num2)
         {

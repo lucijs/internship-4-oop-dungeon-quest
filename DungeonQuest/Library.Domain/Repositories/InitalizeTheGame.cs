@@ -1,51 +1,90 @@
-﻿namespace Library.Domain.Repositories
+﻿using System.ComponentModel.Design;
+
+namespace Library.Domain.Repositories
 {
-    public class Initialize
+    public  class Initialize
     {
-        public static void HeroIsGladiator(string name)
+        internal static Hero hero;
+        public static void HeroIsGladiator(string name,bool first)
         {
-            AllMonsters.hero = new Gladiator(name);
+            hero = new Hero(name, 70, 30);
+            hero.Type = Enum.TypesOfHeroes.Gladiator;
             AllMonsters.MonstersList();
         }
 
-        public static void HeroIsEnchater(string name)
+        public static void HeroIsEnchater(string name, bool first)
         {
-            AllMonsters.hero = new Enchater(name);
+            hero = new Hero(name, 50, 50);
+            hero.Type = Enum.TypesOfHeroes.Enchater;
             AllMonsters.MonstersList();
         }
 
-        public static void HeroIsMarksman(string name)
+        public static void HeroIsMarksman(string name, bool first)
         {
-            AllMonsters.hero = new Marksman(name);
+            hero = new Hero(name, 30, 70);
+            hero.Type = Enum.TypesOfHeroes.Marksman;
             AllMonsters.MonstersList();
         }
 
-        public static bool Default(double hp, double d, string name)
+        public static bool Default(double hp, double d, string name, bool first)
         {
             if(d>60 && hp>60 &&hp>0 && d>0)
                 return false;
             if (d > 60)
-                AllMonsters.hero = new Enchater(name, hp, d);
+            {
+                if (!first)
+                    hero.Reset(Enum.TypesOfHeroes.Enchater, name, hp, d);
+                else
+                {
+                    hero = new Hero(name, hp, d);
+                    hero.Type = Enum.TypesOfHeroes.Enchater;
+                }
+            }
             else if (hp > 60)
-                AllMonsters.hero = new Gladiator(name, hp, d);
+            {
+                if (!first)
+                    hero.Reset(Enum.TypesOfHeroes.Gladiator, name, hp, d);
+                else
+                {
+                    hero = new Hero(name, hp, d);
+                    hero.Type = Enum.TypesOfHeroes.Gladiator;
+                }
+            }
             else
-                AllMonsters.hero = new Marksman(name, hp, d);
+            {
+                if (!first)
+                    hero.Reset(Enum.TypesOfHeroes.Marksman, name, hp, d);
+                else
+                {
+                    hero = new Hero(name, hp, d);
+                    hero.Type = Enum.TypesOfHeroes.Marksman;
+                }
+            }
             AllMonsters.MonstersList();
             return true;
         }
 
-        public static bool ChooseYourself(int choice, string name)
+        public static bool ChooseYourself(int choice, string name, bool first)
         {
             switch (choice)
             {
                 case 1:
-                    HeroIsGladiator(name);
+                    if(!first)
+                        hero.Reset(Enum.TypesOfHeroes.Gladiator, name, 70, 30);
+                    else
+                        HeroIsGladiator(name, first);
                     return true;
                 case 2:
-                    HeroIsEnchater(name);
+                    if(!first)
+                        hero.Reset(Enum.TypesOfHeroes.Enchater, name, 50, 50);
+                    else
+                        HeroIsEnchater(name, first);
                     return true;
                 case 3:
-                    HeroIsMarksman(name);
+                    if(!first)
+                        hero.Reset(Enum.TypesOfHeroes.Marksman, name, 30, 70);
+                    else
+                        HeroIsMarksman(name, first);
                     return true;
                 default: 
                     return false;
